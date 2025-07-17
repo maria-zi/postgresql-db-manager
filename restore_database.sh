@@ -14,7 +14,9 @@ if psql -U postgres -d postgres -c "\l" | grep -qw "$DB_NAME"; then
     echo "Ошибка при удалении базы данных $DB_NAME."
     exit 1
   fi
+  
   echo "База данных $DB_NAME была удалена."
+  
 else
   echo "База данных $DB_NAME не существует."
 fi
@@ -37,7 +39,9 @@ if [ -f "$DUMP_FILE" ]; then
     echo "Ошибка при восстановлении базы данных $DB_NAME из дампа $DUMP_FILE."
     exit 1
   fi
+  
   echo "База данных $DB_NAME восстановлена из дампа $DUMP_FILE."
+  
 else
   echo "Файл дампа не найден в директории $DUMP_DIR."
 fi

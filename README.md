@@ -121,7 +121,7 @@ crontab -e
 ## Структура репозитория
 
 ```plaintext
-download_postgresDB/  
+postgresql-db-manager/  
 ├── download_example_database.sh      # Скрипт для загрузки базы данных  
 ├── create_dump.sh                    # Скрипт для создания дампа  
 ├── remove_old_dumps.sh               # Скрипт для удаления старых дампов  

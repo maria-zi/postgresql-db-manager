@@ -112,8 +112,10 @@ crontab -e
 
 Добавьте следующие строки:
 ```plaintext
-0 0 * * * /home/admin/postgresql_dump/create_dump.sh    # Ежедневное создание дампа базы данных
-5 0 * * * /home/admin/postgresql_dump/remove_old_dumps.sh # Удаление старых дампов
+# Ежедневное создание дампа базы данных
+0 0 * * * /home/admin/postgresql-db-manager/postgresql_dump/create_dump.sh
+# Удаление старых дампов
+5 0 * * * /home/admin/postgresql-db-manager/postgresql_dump/remove_old_dumps.sh 
 ```
 
 ---

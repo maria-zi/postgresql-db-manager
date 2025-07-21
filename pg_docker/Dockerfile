@@ -1,0 +1,8 @@
+# Official PostgreSQL image
+FROM postgres:13
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=pass
+ENV POSTGRES_DB=demo
+
+EXPOSE 5432

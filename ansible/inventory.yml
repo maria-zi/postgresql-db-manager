@@ -1,0 +1,6 @@
+---
+all:
+  hosts:
+    mz_demo_host:
+      ansible_host: 89.104.70.35
+      ansible_user: admin

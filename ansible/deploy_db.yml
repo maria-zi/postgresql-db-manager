@@ -1,0 +1,14 @@
+---
+- name: test
+  hosts: all
+  become: yes
+  become_user: root
+  tasks:
+
+    - name: ping
+      ping:
+
+    - name: install nmap
+      dnf:
+        name: netcat
+        state: present

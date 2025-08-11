@@ -1,5 +1,3 @@
-```sql
--- Создание таблицы CONTRACTS
 CREATE TABLE contracts (
     contractid SERIAL PRIMARY KEY,  -- Используем SERIAL для автоинкремента
     contract_date DATE NOT NULL,  

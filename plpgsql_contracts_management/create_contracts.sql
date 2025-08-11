@@ -1,0 +1,50 @@
+-- Создание таблицы CONTRACTS
+CREATE TABLE contracts (
+    contractid SERIAL PRIMARY KEY,  -- Используем SERIAL для автоинкремента
+    contract_date DATE NOT NULL,  
+    phone_number VARCHAR(15),  
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+    user_created VARCHAR(50),  
+    date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    user_updated VARCHAR(50),  
+    CONSTRAINT check_ph_num CHECK (phone_number ~ '^[0-9]{3,15}$')  -- Проверка формата номера телефона
+);
+
+------------------------------------------------------------------
+
+-- Триггер для установки значений перед добавлением или обновлением
+CREATE OR REPLACE FUNCTION trg_set_contracts()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        NEW.date_created := CURRENT_TIMESTAMP; 
+        NEW.user_created := SESSION_USER;  
+    END IF;
+
+    NEW.date_updated := CURRENT_TIMESTAMP;  
+    NEW.user_updated := SESSION_USER;  
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_set_contracts
+BEFORE INSERT OR UPDATE ON contracts  
+FOR EACH ROW EXECUTE FUNCTION trg_set_contracts();
+
+------------------------------------------------------------------
+
+-- Примеры вставки данных для проверки работы
+INSERT INTO contracts (contract_date, phone_number)
+VALUES (DATE '2025-08-01', '88008888888');
+
+INSERT INTO contracts (contract_date, phone_number)
+VALUES (DATE '2025-08-02', '89279279279');
+
+INSERT INTO contracts (contract_date, phone_number)
+VALUES (DATE '2025-08-03', '5555555555');
+
+INSERT INTO contracts (contract_date)
+VALUES (DATE '2025-08-04');
+
+-- Проверка вставленных данных
+SELECT * FROM contracts;
